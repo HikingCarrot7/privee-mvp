@@ -1,1 +1,1 @@
-# privee-mvp
+# Priveé

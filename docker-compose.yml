@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql:8.0.36
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: privee
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: hiking
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  admin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
