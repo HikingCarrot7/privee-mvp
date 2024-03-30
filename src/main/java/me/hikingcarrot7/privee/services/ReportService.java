@@ -21,11 +21,6 @@ public class ReportService {
   ) {
     Resident resident = residentService.getResidentById(residentId);
     List<Invitation> invitations = invitationService.getInvitationsOnInterval(residentId, intervalParams);
-
-    System.out.println("here!!!!!!!!!!!!!!!");
-    System.out.println("invitations");
-    System.out.println(invitations);
-
     var reporter = new XslxResidentInvitationHistoryReporter(resident, invitations);
     return reporter.generateReport();
   }

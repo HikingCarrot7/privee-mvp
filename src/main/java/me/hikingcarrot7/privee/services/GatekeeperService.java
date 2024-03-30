@@ -10,7 +10,7 @@ import me.hikingcarrot7.privee.utils.PasswordEncoder;
 import me.hikingcarrot7.privee.web.dtos.pagination.PageRequest;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @ApplicationScoped
 public class GatekeeperService {
@@ -21,20 +21,18 @@ public class GatekeeperService {
     return gatekeeperRepository.findAll(pageRequest);
   }
 
-  public Gatekeeper getGatekeeperById(String id) {
-    Gatekeeper gatekeeper = gatekeeperRepository.findById(id);
-    if (Objects.isNull(gatekeeper)) {
-      throw new ResourceNotFoundException(String.format("Gatekeeper with id %s not found", id));
-    }
-    return gatekeeper;
+  public Gatekeeper getGatekeeperById(String gatekeeperId) {
+    Optional<Gatekeeper> gatekeeperMaybe = gatekeeperRepository.findById(gatekeeperId);
+    return gatekeeperMaybe.orElseThrow(
+        () -> new ResourceNotFoundException(String.format("Gatekeeper with gatekeeperId %s not found", gatekeeperId))
+    );
   }
 
   public Gatekeeper getGatekeeperByEmail(String email) {
-    Gatekeeper gatekeeper = gatekeeperRepository.findByEmail(email);
-    if (Objects.isNull(gatekeeper)) {
-      throw new ResourceNotFoundException(String.format("Gatekeeper with email %s not found", email));
-    }
-    return gatekeeper;
+    Optional<Gatekeeper> gatekeeperMaybe = gatekeeperRepository.findByEmail(email);
+    return gatekeeperMaybe.orElseThrow(
+        () -> new ResourceNotFoundException(String.format("Gatekeeper with email %s not found", email))
+    );
   }
 
   public Gatekeeper saveGatekeeper(Gatekeeper gatekeeper) {
