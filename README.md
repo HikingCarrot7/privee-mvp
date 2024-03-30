@@ -2,31 +2,50 @@
 
 ## About
 
-The identified problem that needs to be addressed is the time loss experienced by all parties involved in the entry process of a private residential area. This includes residents, their guests, gatekeepers, and service providers such as electricity, water, internet, and waste management. Essentially, there is poor management in the ingress and egress of non-residents from the premises.
+The identified problem that needs to be addressed is the time loss experienced by all parties involved in the entry
+process of a private residential area. This includes residents, their guests, gatekeepers, and service providers such as
+electricity, water, internet, and waste management. Essentially, there is poor management in the ingress and egress of
+non-residents from the premises.
 
-The core issue lies in the fact that while residents typically have a well-defined and efficient process for entering and exiting the private residential area, guests and service providers do not. This results in congestion and minutes-long queues, leading to delays for all aforementioned individuals. Gatekeepers must verify the identity of incoming individuals and confirm their expected presence in the residential area, often collecting personal information in case of unforeseen circumstances or accidents for which they may be responsible.
+The core issue lies in the fact that while residents typically have a well-defined and efficient process for entering
+and exiting the private residential area, guests and service providers do not. This results in congestion and
+minutes-long queues, leading to delays for all aforementioned individuals. Gatekeepers must verify the identity of
+incoming individuals and confirm their expected presence in the residential area, often collecting personal information
+in case of unforeseen circumstances or accidents for which they may be responsible.
 
-At times, there are poorly defined processes in place for the access of services or guests at the private residential area, which further consumes residents' time. In some cases, residents must call the gatekeepers to notify them of incoming guests or service providers, but this process is not always efficient, as gatekeepers may be preoccupied with attending to incoming guests or service providers.
+At times, there are poorly defined processes in place for the access of services or guests at the private residential
+area, which further consumes residents' time. In some cases, residents must call the gatekeepers to notify them of
+incoming guests or service providers, but this process is not always efficient, as gatekeepers may be preoccupied with
+attending to incoming guests or service providers.
 
-This project aims to address this social issue by not only improving the management of the private residential area to reduce wait times but also by reducing carbon footprint through the alleviation of automobile congestion.
+This project aims to address this social issue by not only improving the management of the private residential area to
+reduce wait times but also by reducing carbon footprint through the alleviation of automobile congestion.
 
 ## Core functionalities
 
 ### Login
 
-Residents, gatekeepers, and administrators who use the application will need to authenticate themselves with an email and a password.
+Residents, gatekeepers, and administrators who use the application will need to authenticate themselves with an email
+and a password.
 
 ### Resident information management
 
-The system will allow the registration of residents of the private residential area for later consultation. It will record the resident's full name, date of birth, email address, and phone number. Only administrators can access the list of registered residents and have the authority to deactivate a resident.
+The system will allow the registration of residents of the private residential area for later consultation. It will
+record the resident's full name, date of birth, email address, and phone number. Only administrators can access the list
+of registered residents and have the authority to deactivate a resident.
 
 ### Gatekeeper information management
 
-The system will allow the registration of a gatekeeper for the private residential area. It will record the gatekeeper's name, email address, and phone number. Only an administrator will be able to list the registered gatekeepers and deactivate a gatekeeper.
+The system will allow the registration of a gatekeeper for the private residential area. It will record the gatekeeper's
+name, email address, and phone number. Only an administrator will be able to list the registered gatekeepers and
+deactivate a gatekeeper.
 
 ### Generation invitations for guests
 
-The main function of the system is that residents will be able to generate passes to allow access to a guest to their residence.
+The main function of the system is that residents will be able to generate passes to allow access to a guest to their
+residence. This pass / invitation consist in a generated QR code associated with a unique token. This token is necessary
+to validate the invitation by a gatekeeper. The system will also send a notification to the resident to notify them that
+the invitation has been created.
 
 ### Invitations management
 
@@ -34,43 +53,58 @@ Users will be able to edit the information of a pass or invalidate the pass so t
 
 ### Invitations history
 
-Users will be able to check the history of all passes they have generated. Similarly, administrators can check the history of passes generated by a resident.
+Users will be able to check the history of all passes they have generated. Similarly, administrators can check the
+history of passes generated by a resident.
 
 ### Invitation verification
 
-The system is responsible for analyzing guest passes to verify their authenticity and ensure they meet the established security criteria. Only a gatekeeper has the permissions to validate the passes.
+The system is responsible for analyzing guest passes to verify their authenticity and ensure they meet the established
+security criteria. Only a gatekeeper has the permissions to validate the passes.
 
 ## Project structure
 
-- **me.hikingcarrot7.privee.repositories**: This layer is responsible for communication with the database. In this project, H2 was used as an in-memory database.
+- **me.hikingcarrot7.privee.repositories**: This layer is responsible for communication with the database. In this
+  project, H2 was used as an in-memory database.
 
-- **me.hikingcarrot7.privee.services**: This layer handles the business logic and communicates with the `repository` layer for access to entities.
+- **me.hikingcarrot7.privee.services**: This layer handles the business logic and communicates with the `repository`
+  layer for access to entities.
 
-- **me.hikingcarrot7.moodleripoff.web**: This layer exposes services through a REST(less) API and communicates with the `service` layer. It also handles input data validation using the **jakarta.validation** specification. Additionally, this layer is responsible for API documentation, error handling, and user authentication and authorization.
+- **me.hikingcarrot7.moodleripoff.web**: This layer exposes services through a REST(less) API and communicates with
+  the `service` layer. It also handles input data validation using the **jakarta.validation** specification.
+  Additionally, this layer is responsible for API documentation, error handling, and user authentication and
+  authorization.
 
-- **me.hikingcarrot7.moodleripoff.models**: Here, the system's entities and their relationships are defined. In summary, business flow is as follows:
+- **me.hikingcarrot7.moodleripoff.models**: Here, the system's entities and their relationships are defined. In summary,
+  business flow is as follows:
 
-  - The entire system revolves around `Invitations`. A `Resident` can have 0 to many invitations.
+    - The entire system revolves around `Invitations`. A `Resident` can have 0 to many invitations.
 
-  - Only residents can create invitations. When an invitation is created, a QR code containing a token associated with the invitation is generated. Additionally, an event is triggered with the aim of notifying the resident by email that the invitation has been created.
+    - Only residents can create invitations. When an invitation is created, a QR code containing a token associated with
+      the invitation is generated. Additionally, an event is triggered with the aim of notifying the resident by email
+      that the invitation has been created.
 
-  - Each of these invitations can only be validated by a `Gatekeeper`.
+    - Each of these invitations can only be validated by a `Gatekeeper`.
 
-  - When an invitation is validated, a record of type `InvitationVerification` is created containing the date it was verified and the gatekeeper who verified it.
+    - When an invitation is validated, a record of type `InvitationVerification` is created containing the date it was
+      verified and the gatekeeper who verified it.
 
-  - The history of invitations can be queried by the resident or an `Admin`.
+    - The history of invitations can be queried by the resident or an `Admin`.
 
-- **me.hikingcarrot7.moodleripoff.scheduling**: This contains all the functionality related to the scheduled review of the validity of the pending invitations. Every 30 seconds, the system checks if there are any invitations that have expired and marks them as expired. Following this, an event is triggered to notify the user to take any necessary actions as soon as possible.
+- **me.hikingcarrot7.moodleripoff.scheduling**: This contains all the functionality related to the scheduled review of
+  the validity of the pending invitations. Every 30 seconds, the system checks if there are any invitations that have
+  expired and marks them as expired. Following this, an event is triggered to notify the user to take any necessary
+  actions as soon as possible.
 
 - **me.hikingcarrot7.moodleripoff.events**: Here, all classes related to events are found:
 
-  - _*InvitationCreationEvent.java*_: Triggered when an invitation is created by a resident.
+    - _*InvitationCreationEvent.java*_: Triggered when an invitation is created by a resident.
 
-  - _*InvitationExpiredEvent.java*_: Triggered when the validity of an invitation has expired.
+    - _*InvitationExpiredEvent.java*_: Triggered when the validity of an invitation has expired.
 
 ## Deploy to Payara Cloud
 
-The project is deployed in the next URL `(PAYARA_HOST)`: [https://start-dev-2601fe95.payara.app/privee/](https://start-dev-2601fe95.payara.app/privee/)
+The project is deployed in the next
+URL `(PAYARA_HOST)`: [https://start-dev-2601fe95.payara.app/privee/](https://start-dev-2601fe95.payara.app/privee/)
 
 > Default ADMIN credentials:
 
@@ -91,17 +125,22 @@ An in-memory database will be created with the default admin credentials listed 
 
 ## Modules
 
-All endpoints are documented using the `Microprofile OpenAPI` specification. The documentation can be found at: `{{PAYARA_HOST}}/api/openapi-ui/index.html`
+All endpoints are documented using the `Microprofile OpenAPI` specification. The documentation can be found
+at: `{{PAYARA_HOST}}/api/openapi-ui/index.html`
 
-> Due to issues described in detail in the section [Possible Improvements and Issues](#possible-improvements-and-issues), it is not possible to access this route in production.
+> Due to issues described in detail in the
+> section [Possible Improvements and Issues](#possible-improvements-and-issues), it is not possible to access this route
+> in production.
 
 The routes are also available in `Postman`, exported in the file `./postman_api_collection.json`.
 
 ### Login
 
-Security is deemed crucial for this project, and therefore the API is protected using `Microprofile JWT`. Authentication is required to consume the services.
+Security is deemed crucial for this project, and therefore the API is protected using `Microprofile JWT`. Authentication
+is required to consume the services.
 
-For simplicity, residents, gatekeepers, and administrators have their own login endpoints. This decision aims to simplify data validation and entity structure.
+For simplicity, residents, gatekeepers, and administrators have their own login endpoints. This decision aims to
+simplify data validation and entity structure.
 
 - Residents can log in using the endpoint `/api/login/resident`.
 - Gatekeepers can log in using the endpoint `/api/login/gatekeeper`.
@@ -109,13 +148,17 @@ For simplicity, residents, gatekeepers, and administrators have their own login 
 
 Only administrators can register residents, gatekeepers, and other administrators.
 
-Authentication and authorization are implemented using the **Microprofile JWT** specification. Token generation logic is handled in the class `me.hikingcarrot7.privee.web.security.JWTTokenGenerator`, utilizing the private key located in the file `src/main/resources/META-INF/microprofile-config.properties`. The private key was generated using [jwtenizr](https://github.com/AdamBien/jwtenizr).
+Authentication and authorization are implemented using the **Microprofile JWT** specification. Token generation logic is
+handled in the class `me.hikingcarrot7.privee.web.security.JWTTokenGenerator`, utilizing the private key located in the
+file `src/main/resources/META-INF/microprofile-config.properties`. The private key was generated
+using [jwtenizr](https://github.com/AdamBien/jwtenizr).
 
 ### Residents
 
 The following functionalities have been implemented for residents:
 
-- **List Residents:** This endpoint returns a list of residents registered in the system. It can only be used by administrators.
+- **List Residents:** This endpoint returns a list of residents registered in the system. It can only be used by
+  administrators.
 
   > GET {{PAYARA_HOST}}/api/residents
 
@@ -127,7 +170,8 @@ The following functionalities have been implemented for residents:
 
   > GET {{PAYARA_HOST}}/api/residents/me
 
-- **Create Resident:** Only administrators can use this endpoint. Required fields are: `firstName`, `lastName`, `phone`, `email`, and `password`.
+- **Create Resident:** Only administrators can use this endpoint. Required fields
+  are: `firstName`, `lastName`, `phone`, `email`, and `password`.
 
   > POST {{PAYARA_HOST}}/api/residents
 
@@ -135,7 +179,8 @@ The following functionalities have been implemented for residents:
 
   > PUT {{PAYARA_HOST}}/api/residents/:residentId
 
-- **Delete Resident:** This function performs a `soft delete` of the entity and does not completely remove it from the database. Only an admin can use this functionality.
+- **Delete Resident:** This function performs a `soft delete` of the entity and does not completely remove it from the
+  database. Only an admin can use this functionality.
 
   > DELETE {{PAYARA_HOST}}/api/residents/:residentId
 
@@ -143,7 +188,8 @@ The following functionalities have been implemented for residents:
 
 The following functionalities have been implemented for gatekeepers:
 
-- **List Gatekeepers:** This endpoint returns a list of gatekeepers registered in the system. It can only be used by administrators.
+- **List Gatekeepers:** This endpoint returns a list of gatekeepers registered in the system. It can only be used by
+  administrators.
 
   > GET {{PAYARA_HOST}}/api/gatekeepers
 
@@ -155,7 +201,8 @@ The following functionalities have been implemented for gatekeepers:
 
   > GET {{PAYARA_HOST}}/api/gatekeepers/me
 
-- **Create Gatekeeper:** Only administrators can use this endpoint. Required fields are: `firstName`, `lastName`, `phone`, `email`, and `password`.
+- **Create Gatekeeper:** Only administrators can use this endpoint. Required fields
+  are: `firstName`, `lastName`, `phone`, `email`, and `password`.
 
   > POST {{PAYARA_HOST}}/api/gatekeepers
 
@@ -163,7 +210,8 @@ The following functionalities have been implemented for gatekeepers:
 
   > PUT {{PAYARA_HOST}}/api/gatekeepers/:gatekeeperId
 
-- **Delete Gatekeeper:** This function performs a `soft delete` of the entity and does not completely remove it from the database. Only an admin can use this functionality.
+- **Delete Gatekeeper:** This function performs a `soft delete` of the entity and does not completely remove it from the
+  database. Only an admin can use this functionality.
 
   > DELETE {{PAYARA_HOST}}/api/gatekeepers/:gatekeeperId
 
@@ -171,7 +219,8 @@ The following functionalities have been implemented for gatekeepers:
 
 The following functionalities have been implemented for administrators:
 
-- **List Administrators:** This endpoint returns a list of administrators registered in the system. It can only be used by administrators.
+- **List Administrators:** This endpoint returns a list of administrators registered in the system. It can only be used
+  by administrators.
 
   > GET {{PAYARA_HOST}}/api/admins
 
@@ -183,7 +232,8 @@ The following functionalities have been implemented for administrators:
 
   > GET {{PAYARA_HOST}}/api/admins/me
 
-- **Create Administrator:** Only administrators can use this endpoint. Required fields are: `firstName`, `lastName`, `phone`, `email`, and `password`.
+- **Create Administrator:** Only administrators can use this endpoint. Required fields
+  are: `firstName`, `lastName`, `phone`, `email`, and `password`.
 
   > POST {{PAYARA_HOST}}/api/admins
 
@@ -191,7 +241,8 @@ The following functionalities have been implemented for administrators:
 
   > PUT {{PAYARA_HOST}}/api/admins/:adminId
 
-- **Delete Administrator:** This function performs a `soft delete` of the entity and does not completely remove it from the database. Only an admin can use this functionality.
+- **Delete Administrator:** This function performs a `soft delete` of the entity and does not completely remove it from
+  the database. Only an admin can use this functionality.
 
   > DELETE {{PAYARA_HOST}}/api/admins/:adminId
 
@@ -205,21 +256,26 @@ The following functionalities have been implemented for invitations:
 
   Resident ID must be passed as a query parameter.
 
-- **Get Invitation History in Excel Format:** Using the capabilities of `Content Negotiation` in the Jakarta RESTful Web Services specification, it is possible to request the invitation history of a resident in Excel format. To do this, specify the header `Accept: application/vnd.ms-excel`.
+- **Get Invitation History in Excel Format:** Using the capabilities of `Content Negotiation` in
+  the `Jakarta RESTful Web Services` specification, it is possible to request the invitations history of a resident in
+  Excel format. To do this, specify the header `Accept: application/vnd.ms-excel`.
 
   > GET {{PAYARA_HOST}}/api/invitations?residentId=:residentId
 
-  > Due to issues described in detail in the [Possible Improvements and Problems](#possible-improvements-and-problems) section, accessing this route in production is not possible.
+  > Due to issues described in detail in the [Possible Improvements and Problems](#possible-improvements-and-problems)
+  > section, accessing this route in production is not possible.
 
 - **Get Invitation by ID:** This endpoint can only be used by residents.
 
   > GET {{PAYARA_HOST}}/api/invitations/:invitationId
 
-- **Create Invitation:** This endpoint can only be used by a resident. Required fields are: `expirationDate`, `guestName`, `guestEmail`, and `vehiclePlane`.
+- **Create Invitation:** This endpoint can only be used by a resident. Required fields
+  are: `expirationDate`, `guestName`, `guestEmail`, and `vehiclePlane`.
 
   > POST {{PAYARA_HOST}}/api/invitations/:invitationId
 
-- **Validate Invitation:** This endpoint can only be used by gatekeepers. When an invitation is validated, its status changes to `VALIDATED`.
+- **Validate Invitation:** This endpoint can only be used by gatekeepers. When an invitation is validated, its status
+  changes to `VALIDATED`.
 
   > POST {{PAYARA_HOST}}/api/invitations/validate/:token?gatekeeperId=:gatekeeperId
 
@@ -229,14 +285,25 @@ The following functionalities have been implemented for invitations:
 
 ## Possible Improvements and Problems
 
-- Sending emails when an invitation is created or expires. Due to limitations in knowledge, it was not possible to implement this functionality in this initial version. Such notifications are considered important for this project to avoid any delays with entry. The plan was to use the `Jakarta Mail` specification to implement this functionality.
+- Sending emails when an invitation is created or expires. Due to limitations in knowledge, it was not possible to
+  implement this functionality in this initial version. Such notifications are considered important for this project to
+  avoid any delays with the entrance of the guests. The plan was to use the `Jakarta Mail` specification to implement
+  this functionality.
 
-- A useful feature could be allowing a resident to 'assign' another resident (family member), in order to have greater flexibility when creating invitations and not relying solely on one person.
+- A useful feature could be allowing a resident to 'assign' another resident (family member), in order to have greater
+  flexibility when creating invitations and not relying solely on one person.
 
 - Integration with `Github Actions` for automatic deployments could be beneficial.
 
-- Using the `Microprofile Metrics` specification instead of using the `PerformanceLog` annotation. This would provide a more robust system monitoring and help identify performance issues as soon as possible.
+- Using the `Microprofile Metrics` specification instead of using the `PerformanceLog` annotation. This would provide a
+  more robust system monitoring and help identify performance issues as soon as possible.
 
-- Issues with the documentation of `Microprofile OpenAPI`. When specifying a `contextRoot` when deploying to `Payara Cloud`, it is no longer possible to access any OpenAPI documentation routes (`{{PAYARA_HOST}}/privee/openapi`). One attempted solution was to create a 'Proxy' as can be seen in the class **src/main/java/me/hikingcarrot7/privee/web/controllers/OpenApiProxyRestFacade.java**, but due to time constraints, a suitable solution was not achieved.
+- Issues with the documentation of `Microprofile OpenAPI`. When specifying a `contextRoot` when deploying
+  to `Payara Cloud`, it is no longer possible to access any OpenAPI documentation
+  routes (`{{PAYARA_HOST}}/privee/openapi`). One attempted solution was to create a 'Proxy' as can be seen in the class
+  **src/main/java/me/hikingcarrot7/privee/web/controllers/OpenApiProxyRestFacade.java**, but due to time constraints, a
+  suitable solution was not achieved.
 
-- There is an issue when generating the Excel document in `Payara Cloud`. Unfortunately, the library used to generate reports has dependencies on some **java.awt.** classes that are not available in the JDK (JDK 17) available for configuration from Payara Cloud.
+- There is an issue when generating the Excel document in `Payara Cloud`. Unfortunately, the library used to generate
+  reports has dependencies on some **java.awt.** classes that are not available in the JDK (JDK 17) available for
+  configuration from Payara Cloud.
