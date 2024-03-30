@@ -45,13 +45,13 @@ public class XslxResidentInvitationHistoryReporter {
   }
 
   private void generateSheetWithInvitationsHistory() {
+    sheet = workbook.createSheet("History");
     createSheetHeader();
     createInvitationsTableHeader();
     populateInvitationsTable();
   }
 
   private void createSheetHeader() {
-    sheet = workbook.createSheet("History");
     Font sheetHeaderFont = workbook.createFont();
     sheetHeaderFont.setBold(true);
     sheetHeaderFont.setFontHeightInPoints((short) 18);

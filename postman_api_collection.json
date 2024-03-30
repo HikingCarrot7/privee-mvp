@@ -1,0 +1,1036 @@
+{
+	"info": {
+		"_postman_id": "e249c9a2-535d-437c-86a6-9b8335ba7672",
+		"name": "Privee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12570536"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login resident",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"ricardoibarra2044@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/login/resident",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"login",
+								"resident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/login/admin",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"login",
+								"admin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"123456789\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{PAYARA_HOST}}/api/login/admin",
+									"host": [
+										"{{PAYARA_HOST}}"
+									],
+									"path": [
+										"api",
+										"login",
+										"admin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Payara Micro #badassfish"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "778"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJraWQiOiJqd3Qua2V5IiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJ1cG4iOiJhZG1pbkBnbWFpbC5jb20iLCJhdXRoX3RpbWUiOjE3MTE3NTc3ODYsImlzcyI6Imh0dHBzOi8vaGlraW5nY2Fycm90Ny5tZSIsImdyb3VwcyI6WyJBRE1JTiJdLCJpZCI6ImZlMzdiMzQyLTE0ODEtNGU3Yi1hMDA1LWQ2ZjU0ZGRhYTVjZiIsImV4cCI6MTcxMjAxNjk4NiwiaWF0IjoxNzExNzU3Nzg2LCJqdGkiOiJhLTEyMyJ9.BHHrm5A_GOzcFnaWdZRGmF8hMqFrS8fCraKH4xc2erDgC3PgmZ8A9LB1X5Tx-kcOV1aL_DJ5smq3wNivZGaoCLR7ViQIb_-fwWHMHPh6C5Lwd4BwH-z33YG_eAmPr65hS23jdX6w-BVX3w5N-3jzvF-KTEVwpVSaVIFsvwjBPYp9DFTlw1vIXuxr_4K0puT4PH4veIknuJeX-At9XuKTrR8kNO_ZomzKrds71k4c91YEzc2NiieSIdKZQBbRmtL9tj2qkNIB34Jcd0va5PwMqP4BVbA9roRrJM2TXelv5KNxJNYuqVtdfLjOVxXNkk_2jDKAawUjToo9yXx9CL5TUg\",\n    \"email\": \"admin@gmail.com\",\n    \"id\": \"fe37b342-1481-4e7b-a005-d6f54ddaa5cf\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login gatekeeper",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"gatekeeper@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/login/gatekeeper",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"login",
+								"gatekeeper"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admins",
+			"item": [
+				{
+					"name": "Get all admins",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/admins",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get admin by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/admins/:adminId",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								":adminId"
+							],
+							"variable": [
+								{
+									"key": "adminId",
+									"value": "434bd194-6111-43d0-b5fe-5a2c84d68ae1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get logged admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/admins/me",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Admin 2\",\n    \"lastName\": \"Admin 2\",\n    \"phone\": \"3335347865\",\n    \"email\": \"admin2@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/admins",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Updated admin 2\",\n    \"lastName\": \"Updated admin 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/admins/:adminId",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								":adminId"
+							],
+							"variable": [
+								{
+									"key": "adminId",
+									"value": "2bd2f87f-bb70-41f3-a29a-23f1f6594bf2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/admins/:adminId",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"admins",
+								":adminId"
+							],
+							"variable": [
+								{
+									"key": "adminId",
+									"value": "2bd2f87f-bb70-41f3-a29a-23f1f6594bf2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Residents",
+			"item": [
+				{
+					"name": "Get all residents",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/residents",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"residents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get resident by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{RESIDENT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/residents/:residentId",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"residents",
+								":residentId"
+							],
+							"variable": [
+								{
+									"key": "residentId",
+									"value": "0651671b-2b1a-4a26-a022-78e3cc3417a0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get logged resident",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{RESIDENT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/residents/me",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"residents",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create resident",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Resident 2 first name\",\n    \"lastName\": \"Resident 2 last name\",\n    \"phone\": \"999673652\",\n    \"email\": \"resident2@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/residents",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"residents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update resident",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{RESIDENT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Updated resident 2 first name\",\n    \"lastName\": \"Updated resident 2 last name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/residents/:residentId",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"residents",
+								":residentId"
+							],
+							"variable": [
+								{
+									"key": "residentId",
+									"value": "729bfe8e-c62b-48a0-9468-9edfebf68cc7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete resident",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/residents/:residentId",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"residents",
+								":residentId"
+							],
+							"variable": [
+								{
+									"key": "residentId",
+									"value": "729bfe8e-c62b-48a0-9468-9edfebf68cc7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gatekeepers",
+			"item": [
+				{
+					"name": "Get all gatekeepers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/gatekeepers",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"gatekeepers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get logged gatekeeper",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{GATEKEEPER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/gatekeepers/me",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"gatekeepers",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create gatekeeper",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Gatekeeper 2\",\n    \"lastName\": \"Gatekeeper 2\",\n    \"email\": \"gatekeeper2@gmail.com\",\n    \"password\": \"123456789\",\n    \"phone\": \"7777777777\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/gatekeepers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gatekeepers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update gatekeeper",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Updated resident 2 first name\",\n    \"lastName\": \"Updated resident 2 last name\",\n    \"phone\": \"9999999998\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/gatekeepers/:gatekeeperId",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"gatekeepers",
+								":gatekeeperId"
+							],
+							"variable": [
+								{
+									"key": "gatekeeperId",
+									"value": "4dcba668-f558-459d-b86e-124405e5c549"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete gatekeeper",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/gatekeepers/:gatekeeperId",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"gatekeepers",
+								":gatekeeperId"
+							],
+							"variable": [
+								{
+									"key": "gatekeeperId",
+									"value": "4dcba668-f558-459d-b86e-124405e5c549"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get gatekeeper by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/gatekeepers/:gatekeeperId",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"gatekeepers",
+								":gatekeeperId"
+							],
+							"variable": [
+								{
+									"key": "gatekeeperId",
+									"value": "7e17de17-4c72-4912-bace-1055911a3502"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invitations",
+			"item": [
+				{
+					"name": "Get invitations of resident",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{RESIDENT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/invitations?residentId=7cd1e93b-0453-405d-9021-dee690bb281b",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"invitations"
+							],
+							"query": [
+								{
+									"key": "residentId",
+									"value": "7cd1e93b-0453-405d-9021-dee690bb281b"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get invitations of resident as Excel",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.ms-excel",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/invitations?residentId=7cd1e93b-0453-405d-9021-dee690bb281b&startDate=2024-03-25&endDate=2024-03-31",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"invitations"
+							],
+							"query": [
+								{
+									"key": "residentId",
+									"value": "7cd1e93b-0453-405d-9021-dee690bb281b"
+								},
+								{
+									"key": "startDate",
+									"value": "2024-03-25"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-03-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create invitation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{RESIDENT_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"expirationDate\": \"2024-03-31 11:30:00\",\n    \"guestName\": \"Javier Ibarra\",\n    \"guestEmail\": \"javier@gmail.com\",\n    \"vehiclePlate\": \"YUC-ZGH91\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/invitations",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"invitations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate invitation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{GATEKEEPER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{PAYARA_HOST}}/api/invitations/validate/:token?gatekeeperId=3e2d8ca3-b181-4018-b14c-c694cccf5e77",
+							"host": [
+								"{{PAYARA_HOST}}"
+							],
+							"path": [
+								"api",
+								"invitations",
+								"validate",
+								":token"
+							],
+							"query": [
+								{
+									"key": "gatekeeperId",
+									"value": "3e2d8ca3-b181-4018-b14c-c694cccf5e77"
+								}
+							],
+							"variable": [
+								{
+									"key": "token",
+									"value": "0a73418e-6fb5-430d-8bb2-a24284d42df4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel invitation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/invitations/:invitationid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"invitations",
+								":invitationid"
+							],
+							"variable": [
+								{
+									"key": "invitationid",
+									"value": "7a34bfa4-815d-47e4-a294-3e1799af582b"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PAYARA_HOST",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "ADMIN_TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "RESIDENT_TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "GATEKEEPER_TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "PAYARA_HOST_PRODUCTION",
+			"value": "https://start-dev-2601fe95.payara.app/privee",
+			"type": "string"
+		}
+	]
+}
