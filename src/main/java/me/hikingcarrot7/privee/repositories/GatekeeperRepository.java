@@ -25,7 +25,7 @@ public class GatekeeperRepository {
 
   public Optional<Gatekeeper> findById(String gatekeeperId) {
     Gatekeeper gatekeeperMaybe = em
-        .createQuery("SELECT g FROM Gatekeeper g WHERE g.gatekeeperId = :gatekeeperId AND g.isDeleted = false", Gatekeeper.class)
+        .createQuery("SELECT g FROM Gatekeeper g WHERE g.id = :gatekeeperId AND g.isDeleted = false", Gatekeeper.class)
         .setParameter("gatekeeperId", gatekeeperId)
         .getSingleResult();
     return Optional.ofNullable(gatekeeperMaybe);
