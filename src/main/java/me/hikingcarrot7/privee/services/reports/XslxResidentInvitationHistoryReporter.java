@@ -1,6 +1,5 @@
 package me.hikingcarrot7.privee.services.reports;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import me.hikingcarrot7.privee.models.ExcelReportResult;
 import me.hikingcarrot7.privee.models.Resident;
 import me.hikingcarrot7.privee.models.invitation.Invitation;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import static me.hikingcarrot7.privee.services.reports.ExcelWorkbookUtils.centeredCellStyle;
 
-@ApplicationScoped
 public class XslxResidentInvitationHistoryReporter {
   private final Resident resident;
   private final List<Invitation> invitations;
